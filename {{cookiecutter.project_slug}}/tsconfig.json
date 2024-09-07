@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "module": "commonjs",
+    "allowJs": true,
+    "outDir": "./{{cookiecutter.project_slug}}/static/webpack_bundles/js",
+    "sourceMap": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "typeRoots": [
+      "./node_modules/@types",
+    ]
+  },
+  "include": [
+    "./{{cookiecutter.project_slug}}/static/js/**/*.ts",
+
+  ],
+  "exclude": [
+    "node_modules",
+  ]
+}
