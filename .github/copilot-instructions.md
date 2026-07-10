@@ -38,4 +38,3 @@ python manage.py collectstatic
 - Favor Tailwind utilities and minimal custom JavaScript.
 - Keep template, README, and generated output examples aligned.
 - Use environment variables for secrets in generated projects.
-

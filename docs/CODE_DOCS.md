@@ -81,6 +81,7 @@ if __name__ == "__main__":
 ### Post-Generation Hooks (if present)
 
 Expected post-generation tasks:
+
 1. Initialize git repository
 2. Create initial migration
 3. Install frontend dependencies (npm/pnpm)
@@ -159,6 +160,7 @@ Three-tier settings module:
 ### `settings/base.py`
 
 Base configuration shared across environments:
+
 - `INSTALLED_APPS` — Django defaults + accounts + pages
 - `MIDDLEWARE` — Standard Django middleware stack
 - `TEMPLATES` — Django template engine with `context_processors`
@@ -170,6 +172,7 @@ Base configuration shared across environments:
 ### `settings/local.py`
 
 Development overrides:
+
 - `DEBUG = True`
 - SQLite database (fast, no external dependency)
 - Django Debug Toolbar (if installed)
@@ -179,6 +182,7 @@ Development overrides:
 ### `settings/production.py`
 
 Production configuration:
+
 - `DEBUG = False`
 - `SECRET_KEY` from environment variable
 - PostgreSQL via `DATABASE_URL`
@@ -230,6 +234,7 @@ All auth templates extend `base.html` and use Tailwind CSS classes for styling:
 **File:** `frontend/`
 
 ### package.json
+
 ```json
 {
   "scripts": {
@@ -294,6 +299,7 @@ volumes:
 ```
 
 ### Dockerfile
+
 ```dockerfile
 FROM python:3.11-slim
 WORKDIR /app
@@ -321,6 +327,7 @@ coverage html
 ```
 
 ### Test Coverage
+
 - **accounts/:** Auth view behavior, form validation, template rendering
 - **pages/:** Page rendering, context data
 - **settings/:** Environment-specific configuration loading

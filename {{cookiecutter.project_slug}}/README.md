@@ -22,7 +22,7 @@ Moved to [settings](http://cookiecutter-django.readthedocs.io/en/latest/settings
 
 - To create a **superuser account**, use this command:
 
-      $ python manage.py createsuperuser
+      python manage.py createsuperuser
 
 For convenience, you can keep your normal user logged in on Chrome and your superuser logged in on Firefox (or similar), so that you can see how the site behaves for both kinds of users.
 
@@ -30,19 +30,19 @@ For convenience, you can keep your normal user logged in on Chrome and your supe
 
 Running type checks with mypy:
 
-    $ mypy {{cookiecutter.project_slug}}
+    mypy {{cookiecutter.project_slug}}
 
 ### Test coverage
 
 To run the tests, check your test coverage, and generate an HTML coverage report:
 
-    $ coverage run -m pytest
-    $ coverage html
-    $ open htmlcov/index.html
+    coverage run -m pytest
+    coverage html
+    open htmlcov/index.html
 
 #### Running tests with pytest
 
-    $ pytest
+    pytest
 
 ### Live reloading and Sass CSS compilation
 
@@ -94,19 +94,19 @@ With Mailpit running, to view messages that are sent by your application, open y
 
 In development, it is often nice to be able to see emails that are being sent from your application. If you choose to use [Mailpit](https://github.com/axllent/mailpit) when generating the project a local SMTP server with a web interface will be available.
 
-1.  [Download the latest Mailpit release](https://github.com/axllent/mailpit/releases) for your OS.
+1. [Download the latest Mailpit release](https://github.com/axllent/mailpit/releases) for your OS.
 
-2.  Copy the binary file to the project root.
+2. Copy the binary file to the project root.
 
-3.  Make it executable:
+3. Make it executable:
 
-        $ chmod +x mailpit
+        chmod +x mailpit
 
-4.  Spin up another terminal window and start it there:
+4. Spin up another terminal window and start it there:
 
         ./mailpit
 
-5.  Check out <http://127.0.0.1:8025/> to see how it goes.
+5. Check out <http://127.0.0.1:8025/> to see how it goes.
 
 Now you have your own mail server running locally, ready to receive whatever you send it.
 

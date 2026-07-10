@@ -36,7 +36,7 @@ Any version that starts with 3.12 will do. If you need to install it, you can ge
 Then install `tox`, if not already installed:
 
 ```bash
-$ python -m pip install tox
+python -m pip install tox
 ```
 
 ### Run the template's test suite
@@ -44,13 +44,13 @@ $ python -m pip install tox
 To run the tests of the template using the current Python version:
 
 ```bash
-$ tox -e py
+tox -e py
 ```
 
-This uses `pytest `under the hood, and you can pass options to it after a `--`. So to run a particular test:
+This uses `pytest`under the hood, and you can pass options to it after a `--`. So to run a particular test:
 
 ```bash
-$ tox -e py -- -k test_default_configuration
+tox -e py -- -k test_default_configuration
 ```
 
 For further information, please consult the [pytest usage docs](https://pytest.org/en/latest/how-to/usage.html#specifying-which-tests-to-run).
@@ -60,8 +60,8 @@ For further information, please consult the [pytest usage docs](https://pytest.o
 The template tests are checking that the generated project is fully rendered and that it passes `flake8`. We also have some test scripts which generate a specific project combination, install the dependencies, run the tests of the generated project, install FE dependencies and generate the docs. They will install the template dependencies, so make sure you create and activate a virtual environment first.
 
 ```bash
-$ python -m venv venv
-$ source venv/bin/activate
+python -m venv venv
+source venv/bin/activate
 ```
 
 These tests are slower and can be run with or without Docker:
@@ -72,7 +72,7 @@ These tests are slower and can be run with or without Docker:
 All arguments to these scripts will be passed to the `cookiecutter` CLI, letting you set options, for example:
 
 ```bash
-$ tests/test_bare.sh use_celery=y
+tests/test_bare.sh use_celery=y
 ```
 
 ## Submitting a pull request
