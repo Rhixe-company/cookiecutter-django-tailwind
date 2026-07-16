@@ -1,117 +1,57 @@
-# RESEARCH_REPORT — cookiecutter-django-tailwind
+# Cookiecutter Django + Tailwind — Research Report
 
-> **Type:** Project research report | **Updated:** 2026-07-16
-
-**Type:** Django project template / Cookiecutter generator
-**Tech Stack:** Django 5.x, django-tailwind, PostgreSQL, Docker, Celery, pytest, pre-commit, Black, ruff, mypy, djlint
-**Status:** Active
+**Date**: 2026-07-16 | **Stack**: Django 5.x+/6.x, Tailwind CSS v4, PostgreSQL, Docker
 
 ---
 
-## Similar Projects
+## 1. Project Overview
+**Upstream**: [cookiecutter/cookiecutter-django](https://github.com/cookiecutter/cookiecutter-django) (13.6k ★) — production-ready Django generator. Our fork adds Tailwind CSS + optional HTMX/Alpine.js while keeping 12-Factor settings, Docker Compose, Celery, and CI/CD.
 
-| Project | Relevance |
-|---------|-----------|
-| django-cookiecutter | Most-starred Django project template |
-| django-tailwind-cli | Standalone Tailwind CSS CLI (2026) |
+**Upstream (2026):** Now targets **Django 6.0 / Python 3.14** (latest release 2026.07.15). Django 6.0 ships a built-in background-tasks framework (Celery alternative), native CSP middleware, template partials, and the modern email API.
 
----
+## 2. Community & Alternatives
+Reddit/HN split on opinionated vs production-ready. **Django Keel** (lighter) and **django-project-template** exist but Cookiecutter remains the "gold standard" (BugBytes, 2026). Main criticism: accumulated complexity over a decade.
 
-## Key Findings
+## 3. Django Project Structure
+**Settings layered**: `base.py` → `local.py` / `production.py` via `django-environ`. **Modular apps** as bounded contexts with `services.py` + `selectors.py`. Quality enforced via pre-commit (Black, ruff, mypy, djlint) + pytest coverage. Core principle: thin views, fat services.
 
-### Django 5.x Project Structure
-- Layered settings pattern (`base.py` → `local.py` → `production.py`) is the industry standard
-- Always start with a custom user model (impossible to add later without migrations)
-- Use `django-environ` for all secrets; separate `local.yml` (dev) and `production.yml` (prod)
-- Pre-configure linting (Ruff, isort) and security (bandit, detect-secrets) via pre-commit
-- Cookiecutter upgrade path is one-shot scaffold — treat generated projects as standalone after creation
+## 4. Tailwind CSS Integration
+**Recommended**: Tailwind CLI v4 via npm — no runtime Node dependency on Django. v4 uses `@import "tailwindcss"` (not `@tailwind`), no `tailwind.config.js` (CSS-based config), auto-detects templates. Alternative: `django-tailwind` PyPI package for `manage.py` commands.
 
-### django-tailwind Integration
-- `django-tailwind-cli` (May 2026) provides standalone Tailwind binary — eliminates npm as build dependency
-- django-tailwind v2.0 recommends `honcho` for running Django + Tailwind concurrently
-- Tailwind utility-first CSS pairs naturally with Django server-rendered templates
-- Production caching: `ManifestStaticFilesStorage` for cache-busting static files
+**Critical — Cache-busting**: Single `tailwind.css` aggressively cached by browsers. Fix with `ManifestStaticFilesStorage` + `collectstatic` — hash fingerprint prevents stale CSS after deploy.
 
-### Production Security Hardening
-- `python manage.py check --deploy` must run before every production deployment
-- CSP via `django-csp` with REPORT_ONLY mode first is recommended XSS prevention
-- Django 6.0 checklist: HSTS, secure cookies, DEBUG=False, proper ALLOWED_HOSTS
-- Use S3-compatible storage (django-storages + boto3) for production media files
-- Rust-based Ruff supersedes flake8 + isort + pycodestyle for linting
+## 5. Django REST Framework
+Prefer **ViewSets** for CRUD (consistent URLs, less boilerplate). Override `get_queryset()`, `perform_create()`,
+`get_serializer_class()` per action. **JWT** via `simplejwt` preferred. Pagination essential (`PageNumberPagination`/`CursorPagination`). Use `select_related`/`prefetch_related` in querysets to avoid N+1. `drf-spectacular` for OpenAPI docs.
 
----
+## 6. PostgreSQL Optimization
+**Django 5.1+ native pooling**: `min_size: 4, max_size: 16` — 60-80% overhead reduction, replaces PgBouncer. **N+1 fix**: `select_related`(FK JOIN) + `prefetch_related`(M2M) yields 4000ms→330ms (10×). Use `.only()`/`.defer()` for field selection, composite indexes in `Meta.indexes`, `qs.explain(ANALYZE=True)` for analysis. Pitfalls: index overheads writes; `psycopg2-binary` is dev-only.
 
-## Cheatsheets & Quick Reference
+## 7. Docker & Production Deployment
+**Architecture**: Nginx (SSL/static) → Gunicorn (WSGI) → PostgreSQL. Multi-stage Dockerfile (builder→slim runtime),
+non-root user, dependency caching, health checks. Gunicorn: 2-4 workers/core, log to stdout. Traefik (cookiecutter default, auto SSL) vs Nginx + Certbot (more documented). Named volumes for DB persistence — anonymous volumes lost on `docker compose down`.
 
-| Topic | Resource | Type |
-|-------|----------|------|
-| Django 5.x settings | <https://docs.djangoproject.com/en/5.2/topics/settings/> | Docs |
-| django-tailwind CLI | <https://django-tailwind.readthedocs.io/en/latest/installation.html> | Guide |
-| Django deploy checklist | <https://docs.djangoproject.com/en/6.0/howto/deployment/checklist> | Checklist |
+## 8. Security Checklist
+**Essential settings**: `DEBUG=False`, `SECURE_SSL_REDIRECT`, `SESSION_COOKIE_SECURE`, `CSRF_COOKIE_SECURE`,
+`SECURE_HSTS_SECONDS=31536000`, `X_FRAME_OPTIONS='DENY'`. **Argon2** password hasher, `django-axes` rate limiting (5 attempts), `django-csp` for Content Security Policy. **2026 CVEs**: CVE-2026-1207 (PostGIS input), CVE-2026-1287/1312 (`**kwargs` filter injection). Pre-deploy: `check --deploy`, `pip-audit`, `safety check`.
 
----
+## 9. HTMX & Alpine.js
+**HTMX** (~14KB): dynamic content/forms/partial updates, zero JS knowledge. **Alpine.js** (~15KB): client-side interactivity (modals, toggles). Combined ~30KB vs React/Vue 100-200KB+. HTMX won 2026 SaaS simplicity comparison. No API versioning headaches — server renders HTML. `django-vite` pairs well with both.
 
-## Best Practices
+## 10. Common Pitfalls
+- **Cookiecutter**: Overwhelming for small projects; Traefik learning curve; generated project won't auto-update
+- **Tailwind**: Cache-busting critical; Node required for dev; JIT slow on large projects
+- **Docker**: No env vars in Dockerfiles; always use named volumes for Postgres
+- **DRF**: Nested serializers = N+1 traps; start API versioning early; set strict default permissions
 
-1. **Settings split** — `base.py`, `local.py`, `production.py`, `test.py` in `config/settings/` package
-2. **Custom user model from day one** — impossible to add later without complex migrations
-3. **Separate Docker Compose files** — `local.yml` for dev, `production.yml` for prod
-4. **Pre-commit hooks** — Ruff, end-of-file-fixer, trailing-whitespace, detect-private-key
-5. **12-factor app** — config from environment, strict separation of build/release/run
+## 11. Key Takeaways & Action Items
+**Upstream provides**: Docker Compose, 12-Factor settings, split settings, custom user, allauth, Celery, Sentry,
+pre-commit, PostgreSQL. **Our fork adds**: Tailwind v4 CLI integration, cache-busted static pipeline, optional HTMX/Alpine.js, multi-stage Docker for Tailwind assets, async ORM/connection pooling docs.
+
+**Open decisions**: Tailwind v3 vs v4 default; CLI binary vs npm; Whitenoise vs Nginx vs S3 for prod static;
+HTMX opt-in vs default; `django-tailwind` package vs manual CLI.
 
 ---
 
-## Common Pitfalls
-
-| Pitfall | Impact | Avoidance |
-|---------|--------|-----------|
-| Cookiecutter upgrade path | Stuck on old template | Treat generated project as standalone; patch manually |
-| Feature sprawl | Unnecessary complexity | Only enable needed options during cookiecutter prompts |
-| Missing CUSTOM_USER_MODEL | Migration nightmare | Set `AUTH_USER_MODEL` before first migration |
-| Django version lock-in | Security gaps | Pin versions carefully; plan upgrades quarterly |
-
----
-
-## Performance
-
-1. **`ManifestStaticFilesStorage`** — cache-busting static files; invalidates on content change
-2. **Django `select_related`/`prefetch_related`** — prevent N+1 queries in template rendering
-3. **PostgreSQL connection pooling** — `CONN_MAX_AGE` or pgbouncer for production
-4. **Gunicorn workers** — `2-4 × CPU cores` for sync; Uvicorn for async workloads
-5. **Template caching** — `django.core.cache.backends` for fragment caching
-
----
-
-## Security
-
-1. **`python manage.py check --deploy`** — run before every production deployment
-2. **CSP headers** via `django-csp` — start in REPORT_ONLY mode
-3. **HSTS** — `SECURE_HSTS_SECONDS` with `includeSubDomains` preload
-4. **Secure cookies** — `SESSION_COOKIE_SECURE`, `CSRF_COOKIE_SECURE`
-5. **Secrets in env vars** — never hardcode; use `django-environ` or 1Password CLI
-
----
-
-## Related Projects (in workspace)
-
-- **ecom** — shared DRF + Django patterns
-- **profile** — shared Django 4.x + PostgreSQL conventions
-- **rhixecompany-comics** — shared Django/DRF + Celery patterns
-- **Django-Scrapy-Selenium** — shared Django 4.x + DRF architecture
-- **xamehi** — shared Django/DRF conventions
-
----
-
-## Resources
-
-| Resource | URL |
-|----------|-----|
-| Django Docs | <https://docs.djangoproject.com/en/5.2/> |
-| Cookiecutter Django | <https://github.com/cookiecutter/cookiecutter-django> |
-| django-tailwind | <https://django-tailwind.readthedocs.io> |
-
-### Research Methodology
-- **Web search:** web_search (2026 Django patterns)
-- **Documentation:** web_extract (Django docs, cookiecutter-django repo)
-- **Tool research:** django-tailwind-cli, Ruff migration patterns
-- **Last verified:** 2026-07-16
+Full URLs in `web-research-cookiecutter-django-tailwind.md`.
+## Related Projects

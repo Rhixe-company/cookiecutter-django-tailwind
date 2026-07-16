@@ -32,7 +32,7 @@ A Cookiecutter project template for scaffolding Django applications with Tailwin
 ### Configuration Variables
 
 | Variable | Type | Default | Description |
-|----------|------|---------|-------------|
+| ---------- | ------ | --------- | ------------- |
 | `project_name` | string | "Django Tailwind Project" | Human-readable project name |
 | `project_slug` | derived | Auto-generated from `project_name` | Python package name, URL prefix |
 | `description` | string | "A Django project with Tailwind CSS" | Project description |
@@ -200,7 +200,7 @@ Production configuration:
 ### Views
 
 | View | Route | Description |
-|------|-------|-------------|
+| ------ | ------- | ------------- |
 | `LoginView` | `/accounts/login/` | Login with Django auth |
 | `LogoutView` | `/accounts/logout/` | Logout with confirmation |
 | `SignUpView` | `/accounts/signup/` | User registration |

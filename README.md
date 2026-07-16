@@ -11,7 +11,7 @@ A cookiecutter project template for generating Django 5.x projects with Tailwind
 ### Languages & Runtimes
 
 | Technology | Version | Usage |
-|---|---|---|
+| --- | --- | --- |
 | **Python** | ^3.12 | Backend language |
 | **Django** | ^5.x | Web framework |
 | **JavaScript** | — | Frontend (Tailwind) |
@@ -20,7 +20,7 @@ A cookiecutter project template for generating Django 5.x projects with Tailwind
 ### Generated Project Dependencies
 
 | Category | Technologies |
-|---|---|
+| --- | --- |
 | **Web Framework** | Django 5.x |
 | **API Framework** | Django REST Framework (optional) |
 | **Frontend** | Tailwind CSS (via django-tailwind), Alpine.js, htmx |
@@ -33,7 +33,7 @@ A cookiecutter project template for generating Django 5.x projects with Tailwind
 ### Development Tools
 
 | Tool | Purpose |
-|---|---|
+| --- | --- |
 | **pytest + pytest-cov** | Testing & coverage |
 | **pre-commit** | Git hook management |
 | **Black** | Code formatting |
@@ -159,7 +159,7 @@ docker compose -f production.yml up -d
 ## Template Configuration
 
 | Aspect | Details |
-|---|---|
+| --- | --- |
 | **Template Engine** | Cookiecutter (Jinja2-based) |
 | **Variables** | `project_slug`, `author_name`, etc. |
 | **Post-generation hooks** | Git init, pip install, migrations |
