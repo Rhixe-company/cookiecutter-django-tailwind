@@ -215,3 +215,7 @@ tags
 .idea/
 
 .pytest_cache/
+
+node_modules/
+
+.next/
