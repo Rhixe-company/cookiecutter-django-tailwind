@@ -77,13 +77,13 @@ Run daily at 2AM to update our changelog and create a GitHub release. This runs 
 - List all pull requests merged the day before
 - The release name is calendar based, so `YYYY.MM.DD`
 - For each PR:
-  - Get the PR title to summarize the change
-  - Look at the PR labels to classify it in a section of the release notes:
-    - anything labelled `project infrastructure` is excluded
-    - label `update` goes in section "Updated"
-    - label `bug` goes in section "Fixed"
-    - label `docs` goes in section "Documentation"
-    - Default to section "Changed"
+    - Get the PR title to summarize the change
+    - Look at the PR labels to classify it in a section of the release notes:
+        - anything labelled `project infrastructure` is excluded
+        - label `update` goes in section "Updated"
+        - label `bug` goes in section "Fixed"
+        - label `docs` goes in section "Documentation"
+        - Default to section "Changed"
 
 With that in mind, when merging changes, it's a good idea to set the labels and rename the PR title to give a good summary of the change, in the context of the changelog.
 

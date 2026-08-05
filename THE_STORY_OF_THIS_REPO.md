@@ -154,12 +154,14 @@ The template didn't retrofit — it only applies forward. But `rhixecompany-comi
 The template sits at `projects/cookiecutter-django-tailwind/`. It's **not deployed** — it's a **generator**.
 
 **Contents:**
+
 - `cookiecutter.json` — 12 variables
 - `{{cookiecutter.project_slug}}/` — 47 template files
 - `hooks/` — pre/post generation scripts
 - `tests/` — template validation
 
 **Maintenance:**
+
 - Update Django version in `cookiecutter.json` + `requirements/base.txt`
 - Sync tool configs with workspace standards (ruff, mypy, etc.)
 - Test by generating → running generated project's test suite
@@ -171,6 +173,7 @@ The template sits at `projects/cookiecutter-django-tailwind/`. It's **not deploy
 A good template is **opinionated enough to save time, flexible enough to not fight you.**
 
 This template:
+
 - ✅ Enforces settings hierarchy, quality tools, Docker
 - ✅ Makes DRF/allauth/database optional
 - ❌ Doesn't dictate app structure, API design, business logic

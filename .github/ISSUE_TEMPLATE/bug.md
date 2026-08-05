@@ -14,8 +14,8 @@ labels: bug
 
 - Host system configuration:
 
-  - Version of cookiecutter CLI (get it with `cookiecutter --version`):
-  - OS name and version:
+    - Version of cookiecutter CLI (get it with `cookiecutter --version`):
+    - OS name and version:
 
     On Linux, run
 
@@ -40,10 +40,10 @@ labels: bug
 
     ```
 
-  - Python version, run `python3 -V`:
-  - Docker version (if using Docker), run `docker --version`:
-  - docker compose version (if using Docker), run `docker compose --version`:
-  - ...
+    - Python version, run `python3 -V`:
+    - Docker version (if using Docker), run `docker --version`:
+    - docker compose version (if using Docker), run `docker compose --version`:
+    - ...
 
 - Options selected and/or [replay file](https://cookiecutter.readthedocs.io/en/latest/advanced/replay.html):
   On Linux and macOS: `cat ${HOME}/.cookiecutter_replay/cookiecutter-django.json`

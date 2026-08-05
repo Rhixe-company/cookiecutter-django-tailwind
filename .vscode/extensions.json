@@ -1,9 +1,18 @@
 {
-  "recommendations": [
-    "amannn.vscode-djlint",
-    "batisteo.vscode-django",
-    "esbenp.prettier-vscode",
-    "ms-python.python",
-    "ms-python.vscode-pylance"
-  ]
+	"recommendations": [
+		"charliermarsh.ruff",
+		"davidanson.vscode-markdownlint",
+		"dbaeumer.vscode-eslint",
+		"eamodio.gitlens",
+		"editorconfig.editorconfig",
+		"esbenp.prettier-vscode",
+		"ms-python.python",
+		"ms-python.vscode-pylance",
+		"redhat.vscode-yaml"
+	],
+	"unwantedRecommendations": [
+		"ms-vscode.vscode-typescript-tslint-plugin",
+		"hookyqr.beautify",
+		"ms-azuretools.vscode-docker"
+	]
 }

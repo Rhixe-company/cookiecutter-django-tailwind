@@ -20,6 +20,7 @@
 ## Key Findings
 
 ### Django 5.x Project Structure
+
 - Layered settings (`base.py` → `local.py` → `production.py`) is 2026 industry standard
 - Always start with a custom user model (impossible to add later without migrations)
 - `django-environ` for all secrets; separate Compose files per environment
@@ -27,6 +28,7 @@
 - Cookiecutter is one-shot scaffold — treat generated projects as standalone after creation
 
 ### django-tailwind Integration
+
 - `django-tailwind-cli` (2026) provides standalone Tailwind binary — eliminates npm dependency
 - django-tailwind v2.0 recommends `honcho` for running Django + Tailwind concurrently
 - Production caching: `ManifestStaticFilesStorage` for cache-busting
@@ -112,6 +114,7 @@
 | django-tailwind | <https://django-tailwind.readthedocs.io> |
 
 ### Research Methodology
+
 - **Web search:** web_search (2026 Django patterns, deploy hardening)
 - **Documentation:** web_extract (Django docs, cookiecutter-django repo)
 - **Tool research:** django-tailwind-cli, Ruff migration patterns

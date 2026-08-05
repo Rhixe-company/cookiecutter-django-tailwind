@@ -63,6 +63,7 @@
 ## Configuration Highlights
 
 **Settings Hierarchy:**
+
 ```python
 # base.py → local.py (dev) OR production.py (prod)
 from .base import *
@@ -71,6 +72,7 @@ DEBUG = False  # production.py
 ```
 
 **Quality Tools (pyproject.toml):**
+
 ```toml
 [tool.ruff]          # Line length 119, target py312
 [tool.black]         # Same line length

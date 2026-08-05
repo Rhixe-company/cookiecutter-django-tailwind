@@ -1,0 +1,11 @@
+node_modules
+hermes-profiles
+projects
+.next
+dist
+build
+coverage
+*.lock
+*.min.js
+docs/reports/
+.github/prompts

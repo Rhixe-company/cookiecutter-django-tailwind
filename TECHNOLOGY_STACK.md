@@ -49,6 +49,7 @@
 When a user runs `cookiecutter gh:.../cookiecutter-django-tailwind`, the generated project includes:
 
 ### Backend (Django)
+
 | Component | Technology |
 |-----------|------------|
 | **Framework** | Django 5.x |
@@ -63,6 +64,7 @@ When a user runs `cookiecutter gh:.../cookiecutter-django-tailwind`, the generat
 | **Task Queue** | Celery + Redis (optional) |
 
 ### Frontend
+
 | Component | Technology |
 |-----------|------------|
 | **CSS** | Tailwind CSS via django-tailwind |
@@ -71,6 +73,7 @@ When a user runs `cookiecutter gh:.../cookiecutter-django-tailwind`, the generat
 | **Components** | Tailwind + custom |
 
 ### DevOps
+
 | Component | Technology |
 |-----------|------------|
 | **Container** | Docker + Docker Compose |
@@ -104,6 +107,7 @@ config/
 ## Quality Configuration
 
 ### Ruff (`pyproject.toml`)
+
 ```toml
 [tool.ruff]
 target-version = "py312"
@@ -113,6 +117,7 @@ ignore = ["E501", "N818"]
 ```
 
 ### djLint
+
 ```toml
 [tool.djlint]
 profile = "jinja"
@@ -123,6 +128,7 @@ include = ["H017", "H035"]
 ```
 
 ### MyPy
+
 ```toml
 [tool.mypy]
 python_version = "3.12"
@@ -132,6 +138,7 @@ plugins = ["mypy_django_plugin.main"]
 ```
 
 ### pytest
+
 ```toml
 [tool.pytest.ini_options]
 addopts = "-v --tb=short"
@@ -196,6 +203,7 @@ cookiecutter-django-tailwind/
 ## Commands
 
 ### Template Development
+
 ```bash
 # Install template deps
 pip install -r requirements.txt
@@ -209,6 +217,7 @@ djlint .
 ```
 
 ### Generated Project
+
 ```bash
 # Create project
 cookiecutter gh:your-org/cookiecutter-django-tailwind
@@ -229,6 +238,7 @@ python manage.py runserver
 ## CI/CD (Generated)
 
 **GitHub Actions workflow template includes:**
+
 - Python matrix testing (3.11, 3.12, 3.13)
 - Ruff + djLint + MyPy
 - pytest with coverage
