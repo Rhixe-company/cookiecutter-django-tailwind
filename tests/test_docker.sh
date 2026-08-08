@@ -45,8 +45,8 @@ docker compose -f docker-compose.local.yml run \
 # Generate the HTML for the documentation
 docker compose -f docker-compose.docs.yml run docs make html
 
-# Run npm build script if package.json is present
+# Run bun run build script if package.json is present
 if [ -f "package.json" ]
 then
-    docker compose -f docker-compose.local.yml run node npm run build
+    docker compose -f docker-compose.local.yml run node bun run build
 fi

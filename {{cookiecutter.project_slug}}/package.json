@@ -56,5 +56,6 @@
   "scripts": {
     "dev": "",
     "build": ""
-  }
+  },
+  "packageManager": "bun@1.3.14"
 }

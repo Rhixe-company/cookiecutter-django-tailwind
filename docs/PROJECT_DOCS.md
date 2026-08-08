@@ -109,8 +109,8 @@ python manage.py migrate
 
 # Install frontend dependencies and build CSS
 cd frontend
-npm install
-npm run build
+bun install
+bun run build
 cd ..
 
 # Create superuser
@@ -161,7 +161,7 @@ SENTRY_DSN=your-sentry-dsn  # optional
 - **Utility-First** — Full Tailwind utility classes available
 - **Custom Design** — Configure `tailwind.config.js` with project colors, fonts
 - **Optimized Build** — Production build purges unused CSS (avg. 10KB gzipped)
-- **Live Reload** — Watch mode for development: `npm run dev`
+- **Live Reload** — Watch mode for development: `bun run dev`
 
 ---
 
@@ -241,7 +241,7 @@ cp .env.example .env
 python -m venv venv
 source venv/bin/activate
 pip install -r requirements/production.txt
-cd frontend && npm install && npm run build && cd ..
+cd frontend && bun install && bun run build && cd ..
 python manage.py migrate
 python manage.py collectstatic --noinput
 
