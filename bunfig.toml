@@ -1,0 +1,13 @@
+# cookiecutter-django-tailwind — Bun configuration
+# Django project template (mostly Python; Bun for frontend tooling)
+
+[build]
+loader = false
+
+[test]
+coverage = true
+
+[install]
+optional = true
+dev = true
+peer = true
