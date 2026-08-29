@@ -1,51 +1,17 @@
-# cookiecutter-django-tailwind
+# cookiecutter-django-tailwind — AGENTS.md
 
-## Architecture
+**Canonical reference:** See `../../AGENTS.md` for workspace-wide rules, conventions, and workflows.
 
-- **Type:** Django project template / cookiecutter generator
-- **Pattern:** Cookiecutter template with layered settings (base → local → production)
-- **Reference:** [Workflow Analysis](docs/Project_Architecture/Workflow_Analysis.md), [Exemplars](docs/Project_Architecture/exemplars.md)
+This file contains only cookiecutter-django-tailwind-specific overrides and additions.
 
-Django 5.x + Tailwind CSS project template. Generates production-ready Django projects with modern frontend tooling. Meant to be forked/used as a starting point, not run directly.
+## Project-Specific Commands
 
-## Stack
+See `package.json` or `README.md` for build/test/lint commands specific to this project.
 
-- **Backend:** Python 3.12+, Django 5.x, optional Django REST Framework
-- **Frontend:** django-tailwind, optional Alpine.js / htmx
-- **Database:** PostgreSQL (prod), SQLite (dev)
-- **Infra:** Docker Compose, Gunicorn, WhiteNoise, Sentry
-- **Quality:** pytest, pre-commit, Black, ruff, mypy, djlint
+## Project-Specific Conventions
 
-## Commands
+Add any conventions that differ from the workspace root here.
 
-```bash
-cookiecutter gh:your-org/cookiecutter-django-tailwind
-cd my_project
-python -m venv .venv && source .venv/bin/activate
-pip install -r requirements/local.txt
-python manage.py migrate && python manage.py createsuperuser
-python manage.py runserver
-python manage.py tailwind start
-pytest --cov
-```
+---
 
-## Production
-
-```bash
-python manage.py check --deploy && python manage.py collectstatic
-docker compose -f production.yml build && docker compose -f production.yml up -d
-```
-
-## Conventions
-
-- Settings hierarchy: `base.py` → `local.py` → `production.py`
-- django-environ for secrets; never commit secrets
-- Tailwind utility-first CSS; minimal custom CSS
-- Type hints required in all new code
-- pre-commit hooks for linting before commit
-
-## Notes
-
-- Template repo — customize for each new project
-- Optional DRF for API needs
-- Sentry for error tracking in production
+*For all shared rules, toolchain, routing, and conventions, see `../../AGENTS.md`.*
